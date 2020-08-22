@@ -24,21 +24,31 @@ try {
 
 
 // read dir contents
-
-fs.readdir('./files', (err, files) => {
-    if(err) {
-
-        console.log(err);
-        return;
-    }
-
-    console.log(files);
-
-    files.forEach(value => {
-        readFile(`./files/${value}`)
+function readRec(folder) {
+    fs.readdir(folder, (err, files) => {
+        if(err) {
+    
+            console.log(err);
+            return;
+        }
+        console.log(files);
+        files.forEach(value => {
+            // @TODO
+            // Check the file type file
+            // and only read file if it is .txt
+            if(fs.lstatSync(`${folder}/${value}`).isDirectory()) {
+                readRec(`${folder}/${value}`)
+            } else {
+                readFile(`${folder}/${value}`)
+            }
+           
+        })
+        // console.log(files);
     })
-    // console.log(files);
-})
+}
+
+readRec('./files')
+
 
 // sync read dir
 try {
@@ -63,10 +73,31 @@ fs.writeFile('./files/new_file.txt', "content of file", (err) =>{
 
 // Create a new dir
 
-fs.mkdir('./files/newDir', err => {
+// fs.mkdir('./files/newDir', err => {
+//     if(err) {
+//         console.log(err);
+//         return;
+//     }
+//     console.log("Folder created");
+// })
+
+
+// Remove file
+
+fs.unlink('./files/new_file.txt', err => {
     if(err) {
         console.log(err);
         return;
     }
-    console.log("Folder created");
+    console.log('File deleted');
 })
+
+
+// Remove dir
+// fs.rmdir('./files/newDir', err => {
+//     if(err) {
+//         console.log(err);
+//         return;
+//     }
+//     console.log('Directory removed');
+// })
