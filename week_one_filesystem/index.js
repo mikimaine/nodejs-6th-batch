@@ -45,5 +45,28 @@ try {
    let files = fs.readdirSync('./files');
    console.log(files);
 } catch (error) {
-    
+    console.log(error);
 }
+
+
+// Create a new file
+
+fs.writeFile('./files/new_file.txt', "content of file", (err) =>{
+    if(err) {
+        console.log(err);
+        return;
+    }
+
+    console.log("File is created");
+})
+// Create your own  sync writeFileSync usage
+
+// Create a new dir
+
+fs.mkdir('./files/newDir', err => {
+    if(err) {
+        console.log(err);
+        return;
+    }
+    console.log("Folder created");
+})
