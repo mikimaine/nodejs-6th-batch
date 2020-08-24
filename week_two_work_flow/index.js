@@ -17,11 +17,32 @@ function asyncIsEven(param, callback) {
 
 let a = 1;
 
-asyncIsEven(a, (error, result) => {
-    if(error) {
-        console.log(error);
-        return;
-    }
+// asyncIsEven(a, (error, result) => {
+//     if(error) {
+//         console.log(error);
+//         return;
+//     }
 
-    console.log(`value is even? : ${result}`);
-})
+//     console.log(`value is even? : ${result}`);
+// })
+
+ 
+const fs = require('fs')
+
+for(let i=0; i<5;i++) {
+    fs.readFile(`files/${i+1}.txt`,(err,data) => {
+        if(!err) {
+            console.log(i+1 + ' complete');
+        } else {
+            console.log(err);
+        }
+    })
+
+    // fs.readFileSync(`files/${i+1}.txt`)
+    // console.log(i+1 + ' complete');
+}
+
+console.log('Done!');
+
+
+
