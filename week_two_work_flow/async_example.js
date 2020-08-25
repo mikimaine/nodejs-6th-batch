@@ -24,6 +24,8 @@ async.parallel({
 console.log(' >>>>>>>>');
 
 
+
+// async/await
 async.series({
     one: function(callback) {
         setTimeout(function() {
@@ -41,3 +43,10 @@ async.series({
     console.log(results);
     // results is now equal to: {one: 1, two: 2}
 });
+
+
+function name() {
+
+
+    return new Promise(resolve,reject)
+}
