@@ -11,6 +11,7 @@ var articles = [
 // returning all articles
 router.get('/', function(req, res, next) {
   res.json(articles)
+  // next()
 });
 
 // getting a single article
