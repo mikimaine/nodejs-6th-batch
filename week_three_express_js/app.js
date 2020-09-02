@@ -25,6 +25,18 @@ app.use(function(req,res, next) {
   // check for header 
   // if
   // response or next()
+  if(req.headers && req.headers.authorization) {
+    // check if the token is valid from the Database
+    // check date validity
+    next()
+  } else {
+    res.status(401).json({
+      error: true,
+      message: 'No Authorization token found'
+    })
+  }
+  
+  
 })
 
 app.use('/', indexRouter);
