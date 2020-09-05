@@ -1,0 +1,56 @@
+
+<%- include('layout/header'); -%>
+<%- include('layout/nav', {title: title}); -%>
+    
+    <main role="main">
+    
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3">Hello, world!</h1>
+          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+         
+          <% if (message) { %>
+            <div class="alert alert-primary" role="alert">
+              <%= message %>
+            </div>
+          <% } %>
+          
+
+          <form action="/articles" method="POST">
+
+            <div class="col-md-6 mb-3">
+              <label for="firstName">Title</label>
+              <input type="text" class="form-control" name="title" id="title" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Valid title is required.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="firstName">Description</label>
+              <textarea  class="form-control" name="description" id="description" placeholder="" value="" required=""></textarea>
+            </div>
+
+            <input type="submit" value="Create Post" />
+          </form>
+          
+
+
+        </div>
+      </div>
+    
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <% articles.forEach(function(article){ %>
+            <%- include('articles/article', {article: article}); %>
+          <% }); %>
+        </div>
+    
+        <hr>
+    
+      </div> <!-- /container -->
+    
+    </main>
+    
+<%- include('layout/footer'); -%>
