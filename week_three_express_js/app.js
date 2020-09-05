@@ -22,21 +22,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req,res, next) {
-  // check for header 
-  // if
-  // response or next()
   if(req.headers && req.headers.authorization) {
-    // check if the token is valid from the Database
-    // check date validity
     next()
   } else {
-    res.status(401).json({
-      error: true,
-      message: 'No Authorization token found'
-    })
+    next(new Error(" No Authorization token found "))
   }
-  
-  
 })
 
 app.use('/', indexRouter);
@@ -53,9 +43,15 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  // log the error to db
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  // res.render('error');//
+  res.json({
+    error: true,
+    err:err.message
+  })
+
 });
 
 module.exports = app;
